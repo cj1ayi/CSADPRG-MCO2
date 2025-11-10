@@ -13,11 +13,8 @@ fun main() {
             val dataIngestion = DataIngestion()
 
             try {
-                println("Processing dataset... (9,852 rows loaded, 9,234 filtered for 2021-2023)")
-                //val projects = dataIngestion.loadProjects("dpwh_flood_control_projects.csv")
-
-                println("\n✓ Data loaded successfully!")
-                //println("Total projects: ${projects.size}")
+                print("Processing dataset...")
+                val projects = dataIngestion.loadProjects("dpwh_flood_control_projects.csv")
 
             } catch (e: Exception) {
                 println("Error loading data: ${e.message}")
@@ -25,8 +22,34 @@ fun main() {
             }
         }
         2 -> {
-            // TODO: Generate reports
-            println("Report generation not yet implemented")
+            // Generate reports
+            val dataIngestion = DataIngestion()
+
+            try {
+                println()
+                println("Generating reports...")
+                println("Outputs saved to individual files…")
+                println()
+
+                val projects = dataIngestion.loadProjects("dpwh_flood_control_projects.csv", showOutput = true)
+
+                val reportGenerator = ReportGenerator(projects)
+
+                reportGenerator.generateReport1()
+
+                reportGenerator.generateReport2()
+
+                reportGenerator.generateReport3()
+
+                reportGenerator.generateSummaryJson()
+
+                println()
+                print("Back to Report Selection (Y/N): ")
+
+            } catch (e: Exception) {
+                println("Error generating reports: ${e.message}")
+                e.printStackTrace()
+            }
         }
         else -> {
             println("Invalid choice")

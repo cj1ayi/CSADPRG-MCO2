@@ -11,8 +11,6 @@ data class FloodControlProject(
     val fundingYear: Int,
     val typeOfWork: String,
     val contractor: String,
-
-    // Derived fields (REQ-0004)
     val costSavings: Double,
     val completionDelayDays: Long
 )
